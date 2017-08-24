@@ -8,7 +8,7 @@ npm run build
 ```
 
 ## Usage
-```
+```javascript
 import Vue from 'vue'
 import VueFa from 'vuefa'
 
