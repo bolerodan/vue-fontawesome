@@ -40,11 +40,11 @@ export default {
       document.removeEventListener('DOMContentLoaded', this.initFa) // no longer needed so remove listener.
     },
     getIconDef () {
-      this.iconDef = this.faAPI.parse.iconFromPack(`${this.prefix} ${this.prefixIconName}`)
+      const iconDef = this.faAPI.parse.iconFromPack(`${this.prefix} ${this.prefixIconName}`)
       let options = {
         transform: this.getTransform()
       }
-      this.foundIcon = this.faAPI.icon(this.iconDef, options)
+      this.foundIcon = this.faAPI.icon(iconDef, options)
     },
     getTransform () {
       return this.faAPI.parse.transform(this.transform)
