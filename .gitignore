@@ -5,4 +5,4 @@ npm-debug.log
 .idea/
 coverage/
 .vs/
-dev/static/*
+dev/static/**/*.js
