@@ -37,7 +37,7 @@ export default {
       this.faAPI = window.FontAwesome
       this.getIconDef()
       this.booted = true // we can now render
-      document.removeEventListener('DOMContentLoaded', this.initFa) // no longer needed
+      document.removeEventListener('DOMContentLoaded', this.initFa) // no longer needed so remove listener.
     },
     getIconDef () {
       this.iconDef = this.faAPI.parse.iconFromPack(`${this.prefix} ${this.prefixIconName}`)
