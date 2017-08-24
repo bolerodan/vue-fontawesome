@@ -1,14 +1,14 @@
 {
   "name": "Vue-fontawesome",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
     "name": "Dan Wallace",
     "email": "bolerodan@gmail.com"
   },
   "license": "MIT",
   "homepage": "",
-  "main": "dist/vue-fontawesome.js",
-  "unpkg": "dist/vue-fontawesome.js",
+  "main": "dist/vue-fontawesome5.js",
+  "unpkg": "dist/vue-fontawesome5.js",
   "scripts": {
     "watch": "cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --open --hot",

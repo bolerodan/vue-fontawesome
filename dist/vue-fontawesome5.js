@@ -199,4 +199,4 @@ exports.default = {
 /***/ })
 /******/ ]);
 });
-//# sourceMappingURL=vuefa.js.map
+//# sourceMappingURL=vue-fontawesome5.js.map

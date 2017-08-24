@@ -10,7 +10,7 @@ const builds = {
   development: {
     config: {
       output: {
-        filename: 'vuefa.js',
+        filename: 'vue-fontawesome5.js',
         libraryTarget: 'umd'
       }
     }
@@ -18,7 +18,7 @@ const builds = {
   production: {
     config: {
       output: {
-        filename: 'vuefa.min.js',
+        filename: 'vue-fontawesome5.min.js',
         libraryTarget: 'umd'
       }
     },
