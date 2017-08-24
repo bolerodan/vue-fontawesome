@@ -137,13 +137,9 @@ exports.default = {
     }
   },
   created: function created() {
-    var _this = this;
-
     // Font Awesome listens for DOMContentLoaded before its API is available on window.
     if (document.readyState !== 'complete' || document.readyState !== 'loaded') {
-      document.addEventListener('DOMContentLoaded', function () {
-        return _this.initFa();
-      });
+      document.addEventListener('DOMContentLoaded', this.initFa);
     } else {
       this.initFa();
     }
@@ -168,13 +164,13 @@ exports.default = {
     }
   },
   render: function render(h) {
-    var _this2 = this;
+    var _this = this;
 
     if (!this.booted) return; // only render when we know FontAwesome is done since it listens for DOMContentLoaded
     var abstract = this.foundIcon.abstract[0];
     var children = abstract.children.map(function (c) {
       return h(c.tag, {
-        key: _this2.prefixIconName,
+        key: _this.prefixIconName,
         attrs: c.attributes
       });
     });

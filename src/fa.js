@@ -26,7 +26,7 @@ export default {
   created () {
     // Font Awesome listens for DOMContentLoaded before its API is available on window.
     if (document.readyState !== 'complete' || document.readyState !== 'loaded') {
-      document.addEventListener('DOMContentLoaded', () => this.initFa())
+      document.addEventListener('DOMContentLoaded', this.initFa)
     } else {
       this.initFa()
     }
