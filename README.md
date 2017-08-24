@@ -1,4 +1,4 @@
-A component for loading and displaying Font Awesomes SVG icons. Requires the inclusion of the font awesome javascript files (Not included here), currently if you are a backer you can download the zip file and place them in your project index.html
+A component for loading and displaying Font Awesomes 5 SVG icons. Requires the inclusion of the font awesome javascript files (Not included here), currently if you are a backer you can download the zip file and place them in your project index.html
 
 ## Project Commands
 ```
