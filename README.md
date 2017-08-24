@@ -30,5 +30,12 @@ import VueFa from 'vuefa'
 Vue.use(VueFa)
 ```
 
+```html
+  <fa icon="address-book"></fa>
+
+  # change icon pack, apply transformation
+  <fa icon="address-book" prefix="fal" transform="rotate-90"></fa>
+```
+
 ## Launching the Dev Playground
 If you wish to see this component in action, you can load the dev playground by running `npm run dev`, however you will need to place the font awesome javascript files under `dev/static`. Look at `dev/index.html` to see how they are referenced.
