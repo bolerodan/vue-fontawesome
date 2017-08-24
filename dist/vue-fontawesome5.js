@@ -150,14 +150,14 @@ exports.default = {
       this.faAPI = window.FontAwesome;
       this.getIconDef();
       this.booted = true; // we can now render
-      document.removeEventListener('DOMContentLoaded', this.initFa); // no longer needed
+      document.removeEventListener('DOMContentLoaded', this.initFa); // no longer needed so remove listener.
     },
     getIconDef: function getIconDef() {
-      this.iconDef = this.faAPI.parse.iconFromPack(this.prefix + ' ' + this.prefixIconName);
+      var iconDef = this.faAPI.parse.iconFromPack(this.prefix + ' ' + this.prefixIconName);
       var options = {
         transform: this.getTransform()
       };
-      this.foundIcon = this.faAPI.icon(this.iconDef, options);
+      this.foundIcon = this.faAPI.icon(iconDef, options);
     },
     getTransform: function getTransform() {
       return this.faAPI.parse.transform(this.transform);
