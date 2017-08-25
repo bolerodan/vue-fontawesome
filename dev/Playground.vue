@@ -27,7 +27,13 @@
         <fa icon="pencil" transform="shrink-10" :compose="compose" style="font-size:2em; color: #5195cf;"></fa>
       </div>
       <h3>Text</h3>
-      <fa icon="calendar" style="font-size: 2em;">12</fa>
+      <fa icon="calendar" style="font-size: 2em;">
+        <fa-text class="fa-inverse" text="12" transform="shrink-8 down-3"></fa-text>
+      </fa>
+      <h3>Layers</h3>
+      <fa icon="square" style="font-size: 2em; color: #69db7c;">
+        <fa icon="magic" style="color: #d3f9d8;" transform="shrink-6"></fa>
+      </fa>
   </div>
 </template>
 

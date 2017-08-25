@@ -31,7 +31,8 @@ export default {
   },
   created () {
     // Font Awesome listens for DOMContentLoaded before its API is available on window.
-    if (document.readyState !== 'complete' || document.readyState !== 'loaded') {
+    // TODO make this a util function for common components
+    if (document.readyState !== 'complete' && document.readyState !== 'loaded' && document.readyState !== 'interactive') {
       document.addEventListener('DOMContentLoaded', this.initFa)
     } else {
       this.initFa()
@@ -81,8 +82,11 @@ export default {
       }, children)
       return svg
     },
+    renderText (h) {
+
+    },
     renderLayerWrapper (h) {
-      let children = [this.renderSvg(h)]
+      let children = [this.renderSvg(h), this.$slots.default]
       const root = h('span', {
         class: 'fa-layers'
       }, children)
@@ -91,7 +95,6 @@ export default {
   },
   render (h) {
     if (!this.booted) return // only render when we know FontAwesome is done since it listens for DOMContentLoaded
-    console.log('SLOTS?', this.$slots)
     if (this.$slots.default) {
       return this.renderLayerWrapper(h)
     }
