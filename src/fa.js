@@ -75,7 +75,6 @@ export default {
   render (h) {
     if (!this.booted) return // only render when we know FontAwesome is done since it listens for DOMContentLoaded
     const abstract = this.foundIcon.abstract[0]
-    console.log('ABSTRACT', abstract)
     const children = this.getChildren(abstract.children, h)
     const svg = h(abstract.tag, {
       key: this.prefixIconName,
