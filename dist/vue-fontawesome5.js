@@ -88,10 +88,15 @@ var _fa = __webpack_require__(1);
 
 var _fa2 = _interopRequireDefault(_fa);
 
+var _fatext = __webpack_require__(2);
+
+var _fatext2 = _interopRequireDefault(_fatext);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var VueFa = function VueFa(Vue) {
   Vue.component('fa', _fa2.default);
+  Vue.component('fa-text', _fatext2.default);
 };
 
 if (typeof window !== 'undefined' && window.Vue) {
@@ -144,7 +149,8 @@ exports.default = {
   },
   created: function created() {
     // Font Awesome listens for DOMContentLoaded before its API is available on window.
-    if (document.readyState !== 'complete' || document.readyState !== 'loaded') {
+    // TODO make this a util function for common components
+    if (document.readyState !== 'complete' && document.readyState !== 'loaded' && document.readyState !== 'interactive') {
       document.addEventListener('DOMContentLoaded', this.initFa);
     } else {
       this.initFa();
@@ -186,19 +192,32 @@ exports.default = {
           attrs: c.attributes
         }, _this.getChildren(c.children, h));
       });
+    },
+    renderSvg: function renderSvg(h) {
+      var abstract = this.foundIcon.abstract[0];
+      var children = this.getChildren(abstract.children, h);
+      var svg = h(abstract.tag, {
+        key: this.prefixIconName,
+        attrs: abstract.attributes,
+        class: abstract.attributes.class
+      }, children);
+      return svg;
+    },
+    renderText: function renderText(h) {},
+    renderLayerWrapper: function renderLayerWrapper(h) {
+      var children = [this.renderSvg(h), this.$slots.default];
+      var root = h('span', {
+        class: 'fa-layers'
+      }, children);
+      return root;
     }
   },
   render: function render(h) {
     if (!this.booted) return; // only render when we know FontAwesome is done since it listens for DOMContentLoaded
-    var abstract = this.foundIcon.abstract[0];
-    console.log('ABSTRACT', abstract);
-    var children = this.getChildren(abstract.children, h);
-    var svg = h(abstract.tag, {
-      key: this.prefixIconName,
-      attrs: abstract.attributes,
-      class: abstract.attributes.class
-    }, children);
-    return svg;
+    if (this.$slots.default) {
+      return this.renderLayerWrapper(h);
+    }
+    return this.renderSvg(h);
   },
 
   watch: {
@@ -210,6 +229,69 @@ exports.default = {
     },
     compose: function compose() {
       this.getIconDef();
+    }
+  }
+};
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  props: {
+    transform: {
+      required: false,
+      type: String
+    },
+    text: {
+      required: true,
+      type: String
+    }
+  },
+  data: function data() {
+    return {
+      textDef: undefined
+    };
+  },
+  created: function created() {
+    this.initFa();
+  },
+
+  methods: {
+    initFa: function initFa() {
+      this.faAPI = window.FontAwesome;
+      this.getTextDef();
+    },
+    getTextDef: function getTextDef() {
+      var options = {
+        transform: this.getTransform()
+      };
+      this.textDef = this.faAPI.text(this.text, options);
+    },
+    getTransform: function getTransform() {
+      return this.faAPI.parse.transform(this.transform);
+    }
+  },
+  render: function render(h) {
+    var abstract = this.textDef.abstract[0];
+    return h(abstract.tag, {
+      class: abstract.attributes.class,
+      style: abstract.attributes.style,
+      domProps: {
+        innerHTML: this.text
+      }
+    });
+  },
+
+  watch: {
+    transform: function transform() {
+      this.getTextDef();
     }
   }
 };
