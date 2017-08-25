@@ -13,8 +13,19 @@
             <option v-for="p in prefixList">{{p}}</option>
           </select>
       </div>
-      <fa :icon="icon" :transform="transform" :prefix="prefix" class="fa-5x"></fa>
-      <fa icon="leaf"  class="fa-5x fa-spin" style="color: green;"></fa>
+      <div>
+        <fa :icon="icon" :transform="transform" :prefix="prefix" class="fa-5x"></fa>
+        <fa icon="leaf"  class="fa-5x fa-spin" style="color: green;"></fa>
+      </div>
+      <h3>Composition</h3>
+      <div style="margin-bottom: 20px;">
+        <select v-model="compose">
+          <option v-for="c in composeList">{{c}}</option>
+        </select>
+      </div>
+      <div>
+        <fa icon="pencil" transform="shrink-10" :compose="compose" style="font-size:2em; color: #5195cf;"></fa>
+      </div>
   </div>
 </template>
 
@@ -28,7 +39,9 @@
         transform: undefined,
         icon: 'address-book',
         prefix: 'fa',
-        prefixList: ['fa', 'fal', 'far', 'fas']
+        prefixList: ['fa', 'fal', 'far', 'fas'],
+        composeList: ['fa fa-comment', 'fa fa-circle', 'fa fa-square'],
+        compose: 'fa fa-comment'
       }
     }
   }
