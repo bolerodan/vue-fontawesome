@@ -35,6 +35,9 @@ Vue.use(VueFa)
 
   # change icon pack, apply transformation
   <fa icon="address-book" prefix="fal" transform="rotate-90"></fa>
+
+  # composition
+  <fa icon="pencil" transform="shrink-10" compose="fa fa-comment">
 ```
 
 ## Launching the Dev Playground
