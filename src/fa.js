@@ -70,18 +70,32 @@ export default {
           attrs: c.attributes
         }, this.getChildren(c.children, h))
       })
+    },
+    renderSvg (h) {
+      const abstract = this.foundIcon.abstract[0]
+      const children = this.getChildren(abstract.children, h)
+      const svg = h(abstract.tag, {
+        key: this.prefixIconName,
+        attrs: abstract.attributes,
+        class: abstract.attributes.class
+      }, children)
+      return svg
+    },
+    renderLayerWrapper (h) {
+      let children = [this.renderSvg(h)]
+      const root = h('span', {
+        class: 'fa-layers'
+      }, children)
+      return root
     }
   },
   render (h) {
     if (!this.booted) return // only render when we know FontAwesome is done since it listens for DOMContentLoaded
-    const abstract = this.foundIcon.abstract[0]
-    const children = this.getChildren(abstract.children, h)
-    const svg = h(abstract.tag, {
-      key: this.prefixIconName,
-      attrs: abstract.attributes,
-      class: abstract.attributes.class
-    }, children)
-    return svg
+    console.log('SLOTS?', this.$slots)
+    if (this.$slots.default) {
+      return this.renderLayerWrapper(h)
+    }
+    return this.renderSvg(h)
   },
   watch: {
     prefixIconName () {
