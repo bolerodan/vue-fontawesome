@@ -113,13 +113,19 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
   props: {
     icon: {
-      required: true
+      required: true,
+      type: String
     },
     prefix: {
       required: false,
+      type: String,
       default: 'fa'
     },
     transform: {
+      required: false,
+      type: String
+    },
+    compose: {
       required: false,
       type: String
     }
@@ -155,25 +161,38 @@ exports.default = {
     getIconDef: function getIconDef() {
       var iconDef = this.faAPI.parse.iconFromPack(this.prefix + ' ' + this.prefixIconName);
       var options = {
-        transform: this.getTransform()
+        transform: this.getTransform(),
+        compose: this.getComposition()
       };
       this.foundIcon = this.faAPI.icon(iconDef, options);
     },
     getTransform: function getTransform() {
       return this.faAPI.parse.transform(this.transform);
+    },
+    getComposition: function getComposition() {
+      if (this.compose) {
+        return this.faAPI.parse.iconFromPack(this.compose);
+      }
+    },
+    getChildren: function getChildren(children, h) {
+      var _this = this;
+
+      if (!children) return [];
+      return children.map(function (c) {
+        var key = '' + _this.prefixIconName;
+        key = c.attributes ? key + '-' + c.attributes.id : key;
+        return h(c.tag, {
+          key: key,
+          attrs: c.attributes
+        }, _this.getChildren(c.children, h));
+      });
     }
   },
   render: function render(h) {
-    var _this = this;
-
     if (!this.booted) return; // only render when we know FontAwesome is done since it listens for DOMContentLoaded
     var abstract = this.foundIcon.abstract[0];
-    var children = abstract.children.map(function (c) {
-      return h(c.tag, {
-        key: _this.prefixIconName,
-        attrs: c.attributes
-      });
-    });
+    console.log('ABSTRACT', abstract);
+    var children = this.getChildren(abstract.children, h);
     var svg = h(abstract.tag, {
       key: this.prefixIconName,
       attrs: abstract.attributes,
@@ -183,10 +202,13 @@ exports.default = {
   },
 
   watch: {
-    prefixIconName: function prefixIconName(val) {
+    prefixIconName: function prefixIconName() {
       this.getIconDef();
     },
-    transform: function transform(val) {
+    transform: function transform() {
+      this.getIconDef();
+    },
+    compose: function compose() {
       this.getIconDef();
     }
   }
