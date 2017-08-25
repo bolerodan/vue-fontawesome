@@ -12,7 +12,7 @@ export default {
       type: String
     }
   },
-  data() {
+  data () {
     return {
       foundIcon: undefined,
       booted: false
@@ -30,7 +30,6 @@ export default {
     } else {
       this.initFa()
     }
-    
   },
   methods: {
     initFa () {

@@ -3,7 +3,7 @@ const baseWebpackConfig = require('./webpack.base.config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 var extractPlugin = ExtractTextPlugin.extract({
-  use: ['css-loader', 'postcss-loader', 'stylus-loader']
+  use: ['css-loader', 'postcss-loader']
 })
 
 // Helpers
@@ -34,11 +34,6 @@ module.exports = merge(baseWebpackConfig, {
       {
         test: /\.js$/,
         loaders: ['babel-loader'],
-        exclude: /node_modules/
-      },
-      {
-        test: /\.styl$/,
-        use: extractPlugin,
         exclude: /node_modules/
       }
     ]
