@@ -26,6 +26,11 @@
       <div>
         <fa icon="pencil" transform="shrink-10" :compose="compose" style="font-size:2em; color: #5195cf;"></fa>
       </div>
+      <h3>Layers</h3>
+      <span class="fa-layers fa-fw fa-4x">
+        <fa style="color: #69db7c;" icon="square"></fa>
+        <fa style="color: #d3f9d8;" icon="magic" transform="shrink-6"></fa>
+      </span>
   </div>
 </template>
 
